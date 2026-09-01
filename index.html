@@ -223,10 +223,25 @@
     position: fixed; pointer-events: none; opacity: 0; transition: opacity .1s;
     background: var(--surface-1); border: 1px solid var(--rule-strong); border-radius: 5px;
     box-shadow: 0 4px 18px rgba(16,24,32,.16); padding: 8px 11px; font-size: 12.5px;
-    color: var(--text-primary); z-index: 60; max-width: 240px;
+    color: var(--text-primary); z-index: 60; max-width: 280px;
   }
   #tip b { display: block; font-size: 13px; margin-bottom: 2px; }
   #tip span { color: var(--text-secondary); font-variant-numeric: tabular-nums; }
+
+  /* ---------- termos com glossário (hover / toque / teclado) ---------- */
+  [data-term] { cursor: help; -webkit-tap-highlight-color: transparent; }
+  [data-term]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .term { border-bottom: 1px dotted var(--text-muted); }
+  .term:hover, .term:focus-visible { border-bottom-color: var(--accent); color: var(--accent-ink); }
+  .tip-hint {
+    font-size: 12.5px; color: var(--text-secondary); margin: 9px 0 0;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .tip-hint .badge {
+    font-family: "IBM Plex Mono", monospace; font-size: 10px; letter-spacing: .04em;
+    color: var(--accent-ink); background: var(--accent-wash); border-radius: 3px;
+    padding: 1.5px 6px; flex: none;
+  }
 
   /* ---------- notas ---------- */
   .notes { margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--rule); }
@@ -250,7 +265,8 @@
     <div>
       <div class="brand-mark">Challenge FIAP · Oracle · 2026</div>
       <h1>PrioriSUS — Índice de Prioridade de Investimento em Saúde</h1>
-      <p class="sub">Onde falta infraestrutura de saúde no Brasil. O IPIS combina a disponibilidade de UBS e de leitos SUS por habitante em um índice de 0 a 100 — quanto maior, maior o déficit de infraestrutura local.</p>
+      <p class="sub">Onde falta infraestrutura de saúde no Brasil. O <span class="term" data-term="ipis" tabindex="0">IPIS</span> combina a disponibilidade de <span class="term" data-term="ubs" tabindex="0">UBS</span> e de <span class="term" data-term="leitos" tabindex="0">leitos SUS</span> por habitante em um índice de 0 a 100 — quanto maior, maior o déficit de infraestrutura local.</p>
+      <p class="tip-hint"><span class="badge">?</span> Passe o mouse (ou toque, no celular) sobre os termos sublinhados para ver a explicação.</p>
     </div>
     <div class="top-links">
       <a class="lnk" href="https://github.com/ju-napoli/CHALLENGE_PRIORISUS" target="_blank" rel="noopener">Repositório no GitHub ↗</a>
@@ -264,17 +280,17 @@
       <div class="kpi-note" id="kpi-mun-note">cobertura da base do IBGE</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">Em alta prioridade</div>
+      <div class="kpi-label">Em <span class="term" data-term="faixa" tabindex="0">alta prioridade</span></div>
       <div class="kpi-value" id="kpi-alta">—</div>
       <div class="kpi-note" id="kpi-alta-note">terço mais carente da base</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">População em alta prioridade</div>
+      <div class="kpi-label">População em <span class="term" data-term="faixa" tabindex="0">alta prioridade</span></div>
       <div class="kpi-value" id="kpi-pop">—</div>
       <div class="kpi-note" id="kpi-pop-note">pessoas nesses municípios</div>
     </div>
     <div class="kpi">
-      <div class="kpi-label">IPIS médio</div>
+      <div class="kpi-label"><span class="term" data-term="ipis" tabindex="0">IPIS</span> médio</div>
       <div class="kpi-value tnum" id="kpi-ipis">—</div>
       <div class="kpi-note" id="kpi-ipis-note">escala de 0 a 100</div>
     </div>
@@ -286,7 +302,7 @@
       <select id="f-uf"><option value="">Todos os estados</option></select>
     </div>
     <div class="field">
-      <label for="f-faixa">Faixa de prioridade</label>
+      <label for="f-faixa"><span class="term" data-term="faixa" tabindex="0">Faixa de prioridade</span></label>
       <select id="f-faixa">
         <option value="">Todas as faixas</option>
         <option value="2">Alta prioridade</option>
@@ -300,7 +316,7 @@
     </div>
     <label class="toggle" for="f-semubs">
       <input type="checkbox" id="f-semubs">
-      Ocultar municípios sem cadastro de UBS
+      Ocultar municípios <span class="term" data-term="ubssemcadastro" tabindex="0">sem cadastro de UBS</span>
     </label>
     <button class="reset" id="f-reset" type="button">Limpar filtros</button>
     <div class="filter-count"><b id="f-count">0</b> municípios no recorte</div>
@@ -342,10 +358,10 @@
             <th data-key="nome">Município</th>
             <th data-key="uf">UF</th>
             <th data-key="pop">População</th>
-            <th data-key="ubs10">UBS / 10 mil</th>
-            <th data-key="leitos10">Leitos SUS / 10 mil</th>
-            <th data-key="ipis">IPIS</th>
-            <th data-key="faixa">Faixa</th>
+            <th data-key="ubs10"><span class="term" data-term="ubs10" tabindex="0">UBS / 10 mil</span></th>
+            <th data-key="leitos10"><span class="term" data-term="leitos10" tabindex="0">Leitos SUS / 10 mil</span></th>
+            <th data-key="ipis"><span class="term" data-term="ipis" tabindex="0">IPIS</span></th>
+            <th data-key="faixa"><span class="term" data-term="faixa" tabindex="0">Faixa</span></th>
           </tr>
         </thead>
         <tbody id="tbody"></tbody>
@@ -363,7 +379,7 @@
       <p><strong>Leitos ausentes contam como zero.</strong> A base de leitos lista apenas estabelecimentos que possuem leitos, então um município ausente dela é um município sem nenhum leito — informação, não lacuna.</p>
       <p><strong>Infraestrutura local, não acessibilidade.</strong> O índice mede o que existe dentro do território municipal. Municípios pequenos podem estar corretamente referenciados a um polo regional, e isso ainda não é capturado — é a próxima evolução da solução.</p>
     </div>
-    <footer class="foot">Fontes: estimativa populacional IBGE 2025 · cadastro de Unidades Básicas de Saúde · base de leitos hospitalares CNES 2026. Faixas definidas por tercis da distribuição observada.</footer>
+    <footer class="foot">Fontes: estimativa populacional IBGE 2025 · cadastro de Unidades Básicas de Saúde · base de leitos hospitalares <span class="term" data-term="cnes" tabindex="0">CNES</span> 2026. Faixas definidas por <span class="term" data-term="tercis" tabindex="0">tercis</span> da distribuição observada.</footer>
   </div>
 
 </div>
@@ -406,6 +422,46 @@ function showTip(evt, html) {
   tip.style.top = y + 'px';
 }
 function hideTip() { tip.style.opacity = '0'; }
+
+/* ---------------- glossário: hover / toque / teclado nos termos ---------------- */
+const GLOSS = {
+  ipis: { t: 'IPIS — Índice de Prioridade de Investimento em Saúde', d: 'Nota de 0 a 100 que mede a carência de infraestrutura pública de saúde de um município. Quanto maior o número, maior a prioridade de investimento. É a média entre o déficit de UBS e o déficit de leitos SUS por habitante.' },
+  ubs: { t: 'UBS — Unidade Básica de Saúde', d: 'O posto de saúde da rede pública (SUS) mais próximo da população — porta de entrada para consultas, vacinas e atendimento básico.' },
+  leitos: { t: 'Leitos SUS', d: 'Leitos hospitalares disponíveis pelo Sistema Único de Saúde, registrados na base oficial CNES do Ministério da Saúde.' },
+  ubs10: { t: 'UBS / 10 mil habitantes', d: 'Quantas UBS existem no município para cada 10 mil moradores. Quanto menor, pior o acesso à atenção básica local.' },
+  leitos10: { t: 'Leitos SUS / 10 mil habitantes', d: 'Quantos leitos hospitalares do SUS existem no município para cada 10 mil moradores. Quanto menor, pior a capacidade de internação pública local.' },
+  faixa: { t: 'Faixa de prioridade', d: 'Os municípios são divididos em três grupos de tamanho igual (tercis) pelo valor do IPIS: os 33% com índice mais alto ficam em "Alta prioridade", o terço do meio em "Prioridade moderada", e o terço mais baixo em "Baixa prioridade".' },
+  ubssemcadastro: { t: 'UBS sem cadastro', d: 'O município não aparece no cadastro oficial de UBS. Pode ser falta real de posto de saúde ou apenas uma lacuna no cadastro — por isso, nesses casos o índice usa só o déficit de leitos.' },
+  cnes: { t: 'CNES', d: 'Cadastro Nacional de Estabelecimentos de Saúde — a base oficial do Ministério da Saúde com hospitais, leitos e unidades de saúde do país.' },
+  tercis: { t: 'Tercis', d: 'Divisão de uma lista ordenada em três partes de tamanho igual (33% cada). Aqui, os tercis do valor do IPIS definem as faixas de prioridade.' }
+};
+
+function termHtml(key) {
+  const g = GLOSS[key];
+  return g ? '<b>' + g.t + '</b><span>' + g.d + '</span>' : '';
+}
+
+document.addEventListener('mouseover', function (e) {
+  const t = e.target.closest('[data-term]');
+  if (!t) return;
+  const html = termHtml(t.dataset.term);
+  if (html) showTip(e, html);
+});
+document.addEventListener('mouseout', function (e) {
+  const t = e.target.closest('[data-term]');
+  if (t && (!e.relatedTarget || !t.contains(e.relatedTarget))) hideTip();
+});
+document.addEventListener('focusin', function (e) {
+  const t = e.target.closest('[data-term]');
+  if (!t) return;
+  const html = termHtml(t.dataset.term);
+  if (!html) return;
+  const r = t.getBoundingClientRect();
+  showTip({ clientX: r.left, clientY: r.bottom }, html);
+});
+document.addEventListener('focusout', function (e) {
+  if (e.target.closest('[data-term]')) hideTip();
+});
 
 function svgEl(name, attrs) {
   const n = document.createElementNS(NS, name);
@@ -571,6 +627,7 @@ function renderTable() {
     c1.appendChild(document.createTextNode(r.nome + ' '));
     if (r.semUbs) {
       const f = document.createElement('span'); f.className = 'flag'; f.textContent = 'UBS sem cadastro';
+      f.dataset.term = 'ubssemcadastro'; f.tabIndex = 0;
       c1.appendChild(f);
     }
     cells.push(c1);
